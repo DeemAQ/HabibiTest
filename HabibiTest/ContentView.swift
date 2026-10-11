@@ -25,18 +25,17 @@ struct ContentView: View {
                 creditsSection
             }
             .navigationTitle("اختبار صوت حبيبي")
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("ذاكرة التطبيق \(Fmt.mb(model.footprintMB)) · المتاح \(Fmt.mb(model.availableMB))")
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                }
-            }
         }
         .environment(\.layoutDirection, .rightToLeft)
         .task {
             if model.filesReady && model.referenceSamples.isEmpty {
                 await model.selectPreset("najdi")
+            }
+        }
+        .task {
+            while !Task.isCancelled {
+                model.refreshMemory()
+                try? await Task.sleep(for: .seconds(1))
             }
         }
         .fileImporter(isPresented: $showImporter, allowedContentTypes: [.audio, .movie]) { result in
@@ -53,6 +52,10 @@ struct ContentView: View {
 
     private var modelSection: some View {
         Section {
+            LabeledContent("ذاكرة التطبيق الآن") {
+                Text("\(Fmt.mb(model.footprintMB)) · المتاح قبل أن يغلقه النظام \(Fmt.mb(model.availableMB))")
+                    .monospacedDigit()
+            }
             if model.filesReady {
                 LabeledContent("الملفات", value: "جاهزة · \(Fmt.bytes(model.diskUsedBytes))")
             } else if model.downloading {
