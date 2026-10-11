@@ -1,0 +1,7 @@
+// Your own team ID and bundle ID go in Signing.local.xcconfig (not committed).
+// Copy Signing.local.example.xcconfig to get started.
+
+DEVELOPMENT_TEAM =
+PRODUCT_BUNDLE_IDENTIFIER = org.example.habibitest
+
+#include? "Signing.local.xcconfig"
