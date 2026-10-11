@@ -8,7 +8,7 @@ port of F5-TTS. You give it a short clip of someone speaking plus the exact word
 says five sentences in that voice. For each sentence it shows how long it took and how much memory
 it used. Tested on an iPad Air (M2).
 
-I made it to see whether on-device voice cloning is realistic for an AAC (communication) app.
+I made it to see whether on-device voice cloning is realistic on an iPad.
 
 ## Running it
 
