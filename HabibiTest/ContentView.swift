@@ -22,12 +22,11 @@ struct ContentView: View {
                 runSection
                 if !model.results.isEmpty { resultsSection }
                 logSection
-                creditsSection
             }
             .navigationTitle("اختبار صوت حبيبي")
         }
         .environment(\.layoutDirection, .rightToLeft)
-        .environment(\.locale, Locale(identifier: "en_US_POSIX"))  // Western digits
+        .environment(\.locale, Locale(identifier: "en_US_POSIX"))  // Arabic digits
         .task {
             if model.filesReady && model.referenceSamples.isEmpty {
                 await model.selectPreset("najdi")
